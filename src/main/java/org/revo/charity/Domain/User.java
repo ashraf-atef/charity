@@ -16,6 +16,6 @@ public class User {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Phone> phones = new ArrayList<>();
 }
