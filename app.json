@@ -1,4 +1,6 @@
 {
   "name": "revo",
-  "description": "revo"
+  "description": "revo",
+  "repository": "https://github.com/ashraf-revo/charity",
+  "addons": [ "heroku-postgresql" ]
 }
