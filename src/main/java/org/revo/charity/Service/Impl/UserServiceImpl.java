@@ -3,7 +3,6 @@ package org.revo.charity.Service.Impl;
 import org.revo.charity.Domain.User;
 import org.revo.charity.Repository.UserRepository;
 import org.revo.charity.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> findAll() {

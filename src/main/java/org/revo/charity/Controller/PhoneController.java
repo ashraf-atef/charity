@@ -1,9 +1,7 @@
 package org.revo.charity.Controller;
 
 import org.revo.charity.Domain.Phone;
-import org.revo.charity.Domain.User;
 import org.revo.charity.Service.PhoneService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +11,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/phones")
 public class PhoneController {
-    @Autowired
-    private PhoneService phoneService;
+    private final PhoneService phoneService;
+
+    public PhoneController(PhoneService phoneService) {
+        this.phoneService = phoneService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Phone>> findAll() {

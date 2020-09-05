@@ -2,7 +2,6 @@ package org.revo.charity.Controller;
 
 import org.revo.charity.Domain.User;
 import org.revo.charity.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
