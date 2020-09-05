@@ -16,6 +16,6 @@ public class User {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Phone> phones = new ArrayList<>();
 }
