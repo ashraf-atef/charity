@@ -3,10 +3,7 @@ package org.revo.charity.Domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,6 +13,7 @@ public class Phone {
     @GeneratedValue
     private Long id;
     private String num;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
     private User user;
 }
