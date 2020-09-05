@@ -5,6 +5,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      enable_lazy_load_no_trans: true
     show-sql: true
     open-in-view: true
 management:
