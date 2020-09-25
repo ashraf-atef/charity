@@ -23,9 +23,11 @@ import java.util.List;
 
 @Configuration
 public class SecurityConfig {
-    @Autowired
-    private JwtSigner jwtSigner;
+    private final JwtSigner jwtSigner;
 
+    public SecurityConfig(JwtSigner jwtSigner) {
+        this.jwtSigner = jwtSigner;
+    }
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
@@ -41,10 +43,10 @@ public class SecurityConfig {
                     return serverWebExchange.getResponse().setComplete();
                 })
                 .and()
-                .formLogin().loginPage("/login")
-                .and()
+                .formLogin().disable()
                 .authorizeExchange()
-                .pathMatchers("/loginx").permitAll()
+                .pathMatchers("/login").permitAll()
+                .pathMatchers("/register").permitAll()
                 .pathMatchers("/swagger-ui.html").permitAll()
                 .pathMatchers("/v3/api-docs").permitAll()
                 .pathMatchers("/v3/api-docs/swagger-config").permitAll()

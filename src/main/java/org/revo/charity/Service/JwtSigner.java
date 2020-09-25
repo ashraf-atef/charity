@@ -11,18 +11,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.KeyPair;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 
 @Service
 public class JwtSigner {
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private KeyPair keyPair;
+    private final ObjectMapper objectMapper;
+    private final KeyPair keyPair;
 
+    public JwtSigner(ObjectMapper objectMapper, KeyPair keyPair) {
+        this.objectMapper = objectMapper;
+        this.keyPair = keyPair;
+    }
 
     public String createJwt(UserDetails userDetails) {
         HashMap<String, Object> map = new HashMap<>();

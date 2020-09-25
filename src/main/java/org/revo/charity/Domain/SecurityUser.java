@@ -12,7 +12,6 @@ public abstract class SecurityUser implements UserDetails {
         return new ArrayList<>();
     }
 
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
