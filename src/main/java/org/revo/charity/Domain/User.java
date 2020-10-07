@@ -19,6 +19,7 @@ public class User extends SecurityUser{
     @GeneratedValue
     private Long id;
     private String name;
+    @Column(unique = true)
     private String email;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
