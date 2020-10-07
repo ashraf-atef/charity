@@ -4,7 +4,10 @@ import org.revo.charity.Domain.User;
 import org.revo.charity.Service.Impl.ReactiveUserDetailsServiceImpl;
 import org.revo.charity.Service.JwtSigner;
 import org.revo.charity.Service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,10 +28,12 @@ public class MainController {
     }
 
     @PostMapping("login")
-    public Mono<String> login(@RequestBody Mono<User> user) {
+    public Mono<ResponseEntity<String>> login(@RequestBody Mono<User> user) {
         return user.flatMap(it -> userDetailsService.findByUsername(it.getEmail())
                 .filter(itx -> passwordEncoder.matches(it.getPassword(), itx.getPassword())))
-                .map(jwtSigner::createJwt);
+                .map(jwtSigner::createJwt)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.status(401).build());
     }
 
     @PostMapping("register")
@@ -39,5 +44,10 @@ public class MainController {
                     return it;
                 })
                 .map(userService::save);
+    }
+
+    @GetMapping("me")
+    public User getMyAccount(@AuthenticationPrincipal User user) {
+        return user;
     }
 }
