@@ -5,12 +5,11 @@ import org.revo.charity.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-    @RequestMapping("api/users")
+@RequestMapping("api/users")
 public class UserController {
     private final UserService userService;
 
@@ -31,10 +30,5 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
-    }
-
-    @GetMapping("revo")
-    public ResponseEntity<Optional<User>> findRevo() {
-        return ResponseEntity.ok(userService.findRevo());
     }
 }
