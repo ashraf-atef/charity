@@ -23,7 +23,7 @@ public class CharityApplication {
             User user = new User();
             user.setEmail("revo");
             user.setPassword(passwordEncoder.encode("revo"));
-            userService.save(user);
+//            userService.save(user);
         };
     }
 }

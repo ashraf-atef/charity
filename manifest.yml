@@ -1,0 +1,10 @@
+---
+applications:
+  - name: charity
+    memory: 1024M
+    instances: 1
+    path: target/charity-0.0.1-SNAPSHOT.jar
+    env:
+      SPRING_PROFILES_ACTIVE: pivotal
+    services:
+      - postgresql
