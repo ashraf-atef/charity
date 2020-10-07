@@ -51,6 +51,7 @@ public class SecurityConfig {
                 .pathMatchers("/v3/api-docs").permitAll()
                 .pathMatchers("/v3/api-docs/swagger-config").permitAll()
                 .pathMatchers("/webjars/**").permitAll()
+                .pathMatchers("/actuator","/actuator/*/**").permitAll()
                 .pathMatchers("/api/users/revo").permitAll()
                 .anyExchange().authenticated()
                 .and()
