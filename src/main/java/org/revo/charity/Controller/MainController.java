@@ -37,13 +37,13 @@ public class MainController {
     }
 
     @PostMapping("register")
-    public Mono<User> register(@RequestBody Mono<User> user) {
-        return user
-                .map(it -> {
-                    it.setPassword(passwordEncoder.encode(it.getPassword()));
-                    return it;
-                })
-                .map(userService::save);
+    public ResponseEntity<User> register(@RequestBody User user) {
+        if (userService.findByEmail(user.getEmail()).isPresent())
+            return ResponseEntity.status(400).build();
+        else{
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return ResponseEntity.ok(userService.save(user));
+        }
     }
 
     @GetMapping("me")
