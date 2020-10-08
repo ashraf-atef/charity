@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class DonationServiceImpl implements DonationService {
@@ -15,6 +17,11 @@ public class DonationServiceImpl implements DonationService {
 
     public DonationServiceImpl(DonationRepository donationRepository) {
         this.donationRepository = donationRepository;
+    }
+
+    @Override
+    public List<Donation> findAll() {
+        return StreamSupport.stream(donationRepository.findAll().spliterator(),false).collect(Collectors.toList());
     }
 
     @Override

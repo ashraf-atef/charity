@@ -15,11 +15,17 @@ public class ExceptionTranslator {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
-    public ErrorVM processConcurrencyError(DataIntegrityViolationException ex) {
+    public ErrorVM processDataIntegrityViolationException(DataIntegrityViolationException ex) {
         if (ex.getCause() instanceof ConstraintViolationException) {
             ConstraintViolationException cause = (ConstraintViolationException) ex.getCause();
             return new ErrorVM(cause.getCause().getMessage());
         }
+        return new ErrorVM("ERROR");
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public ErrorVM processException(Exception ex) {
         return new ErrorVM("ERROR");
     }
 }

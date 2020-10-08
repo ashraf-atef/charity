@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -27,5 +28,10 @@ public class PackageInfoServiceImpl implements PackageInfoService {
     @Override
     public PackageInfo save(PackageInfo packageInfo) {
         return packageInfoRepository.save(packageInfo);
+    }
+
+    @Override
+    public Optional<PackageInfo> findOne(Long id) {
+        return packageInfoRepository.findById(id);
     }
 }

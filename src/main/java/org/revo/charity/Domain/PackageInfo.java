@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.revo.charity.Controller.View;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -27,7 +29,8 @@ public class PackageInfo {
     @LastModifiedDate
     @JsonView(View.BasicPackageInfo.class)
     private LocalDate lastModifiedDate = LocalDate.now();
-    @OneToOne(mappedBy = "packageInfo",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @OneToOne(mappedBy = "packageInfo",cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JsonView(View.DetailedPackageInfo.class)
     private Donation donation;
     @Enumerated(EnumType.STRING)
