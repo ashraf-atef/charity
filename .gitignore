@@ -1,9 +1,10 @@
 HELP.md
 target/
+src/main/resources/static/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-db.mv.db
+*.db
 ### STS ###
 .apt_generated
 .classpath
