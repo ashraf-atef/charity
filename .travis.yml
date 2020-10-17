@@ -14,10 +14,3 @@ matrix:
         directories:
           - $HOME/.m2
           - docker_images
-      deploy:
-        - provider: cloudfoundry
-          username: $USERNAME
-          password: $PASSWORD
-          api: https://api.run.pivotal.io
-          organization: ihear
-          space: development
