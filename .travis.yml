@@ -9,7 +9,7 @@ matrix:
         - chmod +x mvnw
       install: true
       script:
-        - ./mvnw clean spring-boot:build-image docker:push -DskipTests=true
+        - ./mvnw clean install docker:build docker:push -DskipTests=true -Ddocker.username=$DOCKER_USERNAME -Ddocker.password=$DOCKER_PASSWORD
       cache:
         directories:
           - $HOME/.m2
