@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-boot.build-image.imageName>example.com/library/my-app:v1</spring-boot.build-image.imageName>
     </properties>
 
     <dependencies>
@@ -113,44 +114,56 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
             </plugin>
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.9.1</version>
-                <configuration>
-                    <workingDirectory>src/main/resources/ui-static</workingDirectory>
-                    <npmVersion>6.14.3</npmVersion>
-                    <nodeVersion>v12.16.1</nodeVersion>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>npm run build</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>
-                                run build --
-                                --prod
-                                --output-path=../static
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
             </plugin>
+            <!--
+                        <plugin>
+                            <groupId>com.github.eirslett</groupId>
+                            <artifactId>frontend-maven-plugin</artifactId>
+                            <version>1.9.1</version>
+                            <configuration>
+                                <workingDirectory>src/main/resources/ui-static</workingDirectory>
+                                <npmVersion>6.14.3</npmVersion>
+                                <nodeVersion>v12.16.1</nodeVersion>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>install node and npm</id>
+                                    <goals>
+                                        <goal>install-node-and-npm</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>npm install</id>
+                                    <goals>
+                                        <goal>npm</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>npm run build</id>
+                                    <goals>
+                                        <goal>npm</goal>
+                                    </goals>
+                                    <configuration>
+                                        <arguments>
+                                            run build &#45;&#45;
+                                            &#45;&#45;prod
+                                            &#45;&#45;output-path=../static
+                                        </arguments>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+            -->
         </plugins>
         <resources>
             <resource>
