@@ -16,7 +16,8 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-boot.build-image.imageName>ashraf1abdelrasool/${artifactId}:${version}</spring-boot.build-image.imageName>
+        <spring-boot.build-image.imageName>ashraf1abdelrasool/${artifactId}:${version}
+        </spring-boot.build-image.imageName>
     </properties>
 
     <dependencies>
@@ -161,6 +162,18 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.33.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${spring-boot.build-image.imageName}</name>
+                        </image>
+                    </images>
+                </configuration>
             </plugin>
         </plugins>
         <resources>

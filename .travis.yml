@@ -9,8 +9,7 @@ matrix:
         - chmod +x mvnw
       install: true
       script:
-        - ./mvnw clean spring-boot:build-image -DskipTests=true
+        - ./mvnw clean spring-boot:build-image docker:push -DskipTests=true
       cache:
         directories:
           - $HOME/.m2
-          - docker_images
