@@ -7,12 +7,12 @@ import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.revo.charity.controller.filter.vm.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -165,7 +165,7 @@ public class SpecificationUtil {
             Field declaredField = tClass.getDeclaredField(strings.get(0));
             if (strings.size() > 1) {
                 if (Collection.class.isAssignableFrom(declaredField.getType())) {
-                    return getType(strings.stream().skip(1).collect(Collectors.joining(".")), (Class<T>) ((ParameterizedTypeImpl) declaredField.getGenericType()).getActualTypeArguments()[0]);
+                    return getType(strings.stream().skip(1).collect(Collectors.joining(".")), (Class<T>) ((ParameterizedType) declaredField.getGenericType()).getActualTypeArguments()[0]);
                 }
                 return getType(strings.stream().skip(1).collect(Collectors.joining(".")), declaredField.getType());
             }
