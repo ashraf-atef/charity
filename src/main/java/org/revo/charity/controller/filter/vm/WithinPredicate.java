@@ -1,12 +1,11 @@
 package org.revo.charity.controller.filter.vm;
 
-//import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Point;
 import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.hibernate.query.criteria.internal.ParameterRegistry;
 import org.hibernate.query.criteria.internal.Renderable;
 import org.hibernate.query.criteria.internal.compile.RenderingContext;
 import org.hibernate.query.criteria.internal.predicate.AbstractSimplePredicate;
-import org.springframework.data.geo.Point;
 
 import javax.persistence.criteria.Expression;
 import java.io.Serializable;

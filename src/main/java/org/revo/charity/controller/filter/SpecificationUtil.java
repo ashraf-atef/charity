@@ -1,12 +1,11 @@
 package org.revo.charity.controller.filter;
 
-//import com.vividsolutions.jts.geom.Coordinate;
-//import com.vividsolutions.jts.geom.GeometryFactory;
-//import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.revo.charity.controller.filter.vm.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.geo.Point;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.EntityManager;
@@ -211,10 +210,9 @@ public class SpecificationUtil {
     }
 
     private static <T> Map.Entry<Path<Point>, Point> getExpressionsPathToValuePoint(Root<T> root, FilterEntry it, Class<T> tClass) {
-//        List<Double> value = (List<Double>) it.getValue();
-//        Point point = new GeometryFactory().createPoint(new Coordinate(value.get(0), value.get(1)));
-//        return new AbstractMap.SimpleEntry<>(getPath(root, it.getField(), tClass, Point.class), point);
-        return null;
+        List<Double> value = (List<Double>) it.getValue();
+        Point point = new GeometryFactory().createPoint(new Coordinate(value.get(0), value.get(1)));
+        return new AbstractMap.SimpleEntry<>(getPath(root, it.getField(), tClass, Point.class), point);
     }
 
     private static <T> boolean isCollection(String field, Class<T> tClass) {

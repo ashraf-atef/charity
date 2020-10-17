@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.vividsolutions.jts.geom.Point;
 import lombok.Getter;
 import lombok.Setter;
 import org.revo.charity.controller.View;
-import org.springframework.data.geo.Point;
 
 import javax.persistence.*;
 

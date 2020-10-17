@@ -26,8 +26,7 @@ public class UserController {
 
     @PostMapping("filter")
     public ResponseEntity<Page<User>> filter(@RequestBody SearchCriteria searchCriteria) {
-        Page<User> all = userService.findAll(searchCriteria);
-        return ResponseEntity.ok(all);
+        return ResponseEntity.ok(userService.findAll(searchCriteria));
     }
 
     @GetMapping("{id}")
