@@ -1,9 +1,10 @@
 package org.revo.charity.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Point;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,8 +33,10 @@ public class User extends SecurityUser {
     private String password;
     @JsonView(View.BasicUser.class)
     private String phone;
-    @Column(name = "location")
-    @JsonIgnore
+    @Column(name = "location",columnDefinition = "geography")
+//    @JsonIgnore
+    @JsonSerialize(using = PointSerializer.class)
+    @JsonDeserialize(using = PointDeserializer.class)
     private Point location;
 
     @JsonView(View.BasicUser.class)
