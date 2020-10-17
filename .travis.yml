@@ -13,6 +13,7 @@ matrix:
       cache:
         directories:
           - $HOME/.m2
+          - docker_images
       deploy:
         - provider: cloudfoundry
           username: $USERNAME
