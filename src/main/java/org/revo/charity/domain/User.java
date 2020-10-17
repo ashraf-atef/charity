@@ -35,9 +35,9 @@ public class User extends SecurityUser {
     private String phone;
     @Column(name = "location",columnDefinition = "geography")
 //    @JsonIgnore
-    @JsonSerialize(using = PointSerializer.class)
-    @JsonDeserialize(using = PointDeserializer.class)
-    private Point location;
+//    @JsonSerialize(using = PointSerializer.class)
+//    @JsonDeserialize(using = PointDeserializer.class)
+//    private Point location;
 
     @JsonView(View.BasicUser.class)
     @Override

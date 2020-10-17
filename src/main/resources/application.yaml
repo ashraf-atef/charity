@@ -9,8 +9,9 @@ spring:
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/charity
-    username: postgres
+    url: jdbc:postgresql://salt.db.elephantsql.com:5432/fskhvmnd
+    username: fskhvmnd
+    password: ObYt3_pRnWMdFHigiFrflDn15elwjFmc
     initialization-mode: always
 management:
   endpoint:
