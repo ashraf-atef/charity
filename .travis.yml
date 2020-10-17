@@ -9,7 +9,7 @@ matrix:
         - chmod +x mvnw
       install: true
       script:
-        - ./mvnw install spring-boot:build-image -DskipTests=true
+        - ./mvnw clean spring-boot:build-image -DskipTests=true
       cache:
         directories:
           - $HOME/.m2
