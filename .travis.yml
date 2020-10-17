@@ -3,11 +3,13 @@ matrix:
     - language: java
       jdk:
         - openjdk12
+      services:
+        - docker
       before_install:
         - chmod +x mvnw
       install: true
       script:
-        - ./mvnw install -DskipTests=true
+        - ./mvnw install spring-boot:build-image -DskipTests=true
       cache:
         directories:
           - $HOME/.m2
