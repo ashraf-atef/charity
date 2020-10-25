@@ -41,7 +41,7 @@ public class PackageInfoController {
                 packageInfo.getDonation().setDonor(userService.findOne(packageInfo.getDonation().getDonor().getId()).orElse(null));
             }
             if (packageInfo.getDonation().getBeneficiary() != null && packageInfo.getDonation().getBeneficiary().getId() != null) {
-                packageInfo.getDonation().setDonor(userService.findOne(packageInfo.getDonation().getBeneficiary().getId()).orElse(null));
+                packageInfo.getDonation().setBeneficiary(userService.findOne(packageInfo.getDonation().getBeneficiary().getId()).orElse(null));
             }
             PackageInfo info = new PackageInfo();
             info.setId(packageInfo.getId());

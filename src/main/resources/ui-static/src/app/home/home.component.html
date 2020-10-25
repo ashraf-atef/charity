@@ -1,1 +1,26 @@
-<p>home works!</p>
+<div class="row" style="height: 100px"></div>
+<div class="row">
+  <div class='col-md-4'></div>
+  <div class="col-md-4">
+    <div>
+      <span>Forward a package</span>
+    </div>
+    <div>
+      <span *ngIf="message">{{message}}</span>
+    </div>
+    <form (submit)="save(form)" #form="ngForm">
+            <div class="form-group">
+              <label for="packageId">packageId</label>
+              <input type="text" class="form-control" id="packageId" name="packageId" [(ngModel)]="packageInfo.id"
+                      placeholder="Enter packageId">
+            </div>
+            <div class="form-group">
+              <label for="packageBeneficiary">packageBeneficiary</label>
+              <input type="text" class="form-control" id="packageBeneficiary" name="packageBeneficiary" [(ngModel)]="packageInfo.donation.beneficiary.id"
+                      placeholder="Enter packageBeneficiary">
+            </div>
+      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save</button>
+    </form>
+  </div>
+  <div class='col-md-4'></div>
+</div>
