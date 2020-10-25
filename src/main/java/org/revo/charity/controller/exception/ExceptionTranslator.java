@@ -1,10 +1,12 @@
 package org.revo.charity.controller.exception;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolationException;
 
@@ -23,6 +25,7 @@ public class ExceptionTranslator {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseBody
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public ErrorVM processException(AccessDeniedException ex) {
         return new ErrorVM(ex.getMessage());
     }
