@@ -14,7 +14,7 @@ Parameters:
 
   Version:
     Type: String
-    Default: '0.0.1-SNAPSHOT'
+    Default: '0.0.2-SNAPSHOT'
     Description: Version of your projct
   DBName:
     Default: MyDatabase

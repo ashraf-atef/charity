@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: charity
-          image: ashraf1abdelrasool/charity:0.0.1-SNAPSHOT
+          image: ashraf1abdelrasool/charity:0.0.2-SNAPSHOT
           ports:
             - containerPort: 8080
               name: http
