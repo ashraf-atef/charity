@@ -15,7 +15,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>12</java.version>
+        <java.version>1.8</java.version>
         <spring-boot.build-image.imageName>
             ashraf1abdelrasool/${project.artifactId}:${project.version}
         </spring-boot.build-image.imageName>
