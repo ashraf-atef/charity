@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: charity-dep
+spec:
+  selector:
+    matchLabels:
+      name: charity
+  template:
+    metadata:
+      name: charity
+      labels:
+        name: charity
+    spec:
+      containers:
+        - name: charity
+          image: ashraf1abdelrasool/charity:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 15
+            timeoutSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5

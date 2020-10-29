@@ -23,11 +23,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>ru.yandex.qatools.embed</groupId>
-            <artifactId>postgresql-embedded</artifactId>
-            <version>2.6</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
@@ -170,21 +165,13 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.33.0</version>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>2.6.0</version>
                 <configuration>
-                    <images>
-                        <image>
-                            <name>${spring-boot.build-image.imageName}</name>
-                            <build>
-                                <dockerFile>${project.basedir}/src/main/docker/Dockerfile</dockerFile>
-                                <assembly>
-                                    <descriptorRef>artifact</descriptorRef>
-                                </assembly>
-                            </build>
-                        </image>
-                    </images>
+                    <to>
+                        <image>${spring-boot.build-image.imageName}</image>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>

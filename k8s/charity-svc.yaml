@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: charity-svc
+spec:
+  selector:
+    name: charity
+  ports:
+    - port: 8080
+      name: http
+      targetPort: 8080
+  type: NodePort
