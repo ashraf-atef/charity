@@ -1,4 +1,14 @@
 spring:
+  application:
+    name: charity
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    kubernetes:
+      config:
+        sources:
+          - name: default
+          - name: ${spring.application.name}
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,9 +28,12 @@ management:
     health:
       show-details: always
   endpoints:
-    jmx:
+    web:
       exposure:
         include: ['*']
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+logging:
+  file:
+    name: ${spring.application.name}.log
