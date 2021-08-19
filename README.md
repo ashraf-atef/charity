@@ -2,4 +2,3 @@ heroku [![Build Status](https://travis-ci.com/ashraf-revo/charity.svg?branch=mas
 ======
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
