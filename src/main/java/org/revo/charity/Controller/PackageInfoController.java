@@ -36,17 +36,17 @@ public class PackageInfoController {
     @PostMapping
     @JsonView(View.PageFullDetailedPackageInfo.class)
     public ResponseEntity<PackageInfo> save(@RequestBody PackageInfo packageInfo) {
-        if (packageInfo.getDonation() != null) {
-            if (packageInfo.getDonation().getDonor() != null && packageInfo.getDonation().getDonor().getId() != null) {
-                packageInfo.getDonation().setDonor(userService.findOne(packageInfo.getDonation().getDonor().getId()).orElse(null));
-            }
-            if (packageInfo.getDonation().getBeneficiary() != null && packageInfo.getDonation().getBeneficiary().getId() != null) {
-                packageInfo.getDonation().setDonor(userService.findOne(packageInfo.getDonation().getBeneficiary().getId()).orElse(null));
-            }
-            PackageInfo info = new PackageInfo();
-            info.setId(packageInfo.getId());
-            packageInfo.getDonation().setPackageInfo(info);
-        }
+//        if (packageInfo.getDonation() != null) {
+//            if (packageInfo.getDonation().getDonor() != null && packageInfo.getDonation().getDonor().getId() != null) {
+//                packageInfo.getDonation().setDonor(userService.findOne(packageInfo.getDonation().getDonor().getId()).orElse(null));
+//            }
+//            if (packageInfo.getDonation().getBeneficiary() != null && packageInfo.getDonation().getBeneficiary().getId() != null) {
+//                packageInfo.getDonation().setDonor(userService.findOne(packageInfo.getDonation().getBeneficiary().getId()).orElse(null));
+//            }
+//            PackageInfo info = new PackageInfo();
+//            info.setId(packageInfo.getId());
+//            packageInfo.getDonation().setPackageInfo(info);
+//        }
         return ResponseEntity.ok(packageInfoService.save(packageInfo));
     }
 }

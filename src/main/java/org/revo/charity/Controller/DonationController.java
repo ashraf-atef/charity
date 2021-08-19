@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/donations")
+@RequestMapping("/donations")
 public class DonationController {
     private final DonationService donationService;
 

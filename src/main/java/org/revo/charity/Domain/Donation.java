@@ -2,6 +2,7 @@ package org.revo.charity.Domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.micrometer.core.lang.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import org.revo.charity.Controller.View;
@@ -31,6 +32,7 @@ public class Donation {
     private User beneficiary;
     @OneToOne
     @JoinColumn
+    @Nullable
     private PackageInfo packageInfo;
     @CreatedDate
     @JsonView(View.BasicDonation.class)

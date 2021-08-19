@@ -19,4 +19,7 @@ public interface View {
     interface PageFullDetailedPackageInfo extends BasicPackageInfo, DetailedPackageInfo, BasicDonation, DetailedDonation,BasicUser {
     }
 
+    interface BasicUserLocation {
+
+    }
 }

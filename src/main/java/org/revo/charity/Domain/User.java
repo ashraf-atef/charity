@@ -3,8 +3,11 @@ package org.revo.charity.Domain;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.micrometer.core.lang.Nullable;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.revo.charity.Controller.View;
 
 import javax.persistence.*;
@@ -30,6 +33,11 @@ public class User extends SecurityUser {
     private String password;
     @JsonView(View.BasicUser.class)
     private String phone;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
+    @JsonView(View.BasicUser.class)
+    @Nullable
+    private UserLocation location;
 
     @JsonView(View.BasicUser.class)
     @Override

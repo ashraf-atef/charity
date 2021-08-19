@@ -29,10 +29,6 @@ public class PackageInfo {
     @LastModifiedDate
     @JsonView(View.BasicPackageInfo.class)
     private LocalDate lastModifiedDate = LocalDate.now();
-    @OneToOne(mappedBy = "packageInfo",cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
-    @Fetch(FetchMode.JOIN)
-    @JsonView(View.DetailedPackageInfo.class)
-    private Donation donation;
     @Enumerated(EnumType.STRING)
     @JsonView(View.BasicPackageInfo.class)
     private PackageType packageType = PackageType.UNKNOWN;
