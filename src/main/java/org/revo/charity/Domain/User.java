@@ -26,6 +26,8 @@ public class User extends SecurityUser {
     private String firstName;
     @JsonView(View.BasicUser.class)
     private String lastName;
+    // because beneficiary doesn't have email
+    @Nullable
     @Column(unique = true)
     @JsonView(View.BasicUser.class)
     private String email;

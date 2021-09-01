@@ -47,6 +47,8 @@ public class SecurityConfig {
                 .authorizeExchange()
                 .pathMatchers("/login").permitAll()
                 .pathMatchers("/register").permitAll()
+                .pathMatchers("/donations/link_meal").permitAll()
+                .pathMatchers("/donations/donate").permitAll()
                 .pathMatchers("/swagger-ui.html").permitAll()
                 .pathMatchers("/v3/api-docs").permitAll()
                 .pathMatchers("/v3/api-docs/swagger-config").permitAll()

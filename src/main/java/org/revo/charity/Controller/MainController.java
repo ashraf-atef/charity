@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.LogRecord;
 
@@ -44,11 +45,25 @@ public class MainController {
 
     @PostMapping("register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        if (userService.findByEmail(user.getEmail()).isPresent())
+        List<User> optionalUser = userService.findListByEmail(user.getEmail());
+        if (!optionalUser.isEmpty() &&
+                // not a beneficiary as beneficiary email is empty
+                optionalUser.get(0).getEmail() != null && !optionalUser.get(0).getEmail().isEmpty())
             return ResponseEntity.status(400).build();
         else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return ResponseEntity.ok(userService.save(user));
+
+            UserLocation userLocation = user.getLocation();
+
+            if (userLocation == null)
+                return ResponseEntity.ok( userService.save(user));
+            else {
+                user.setLocation(null);
+                User dbUser = userService.save(user);
+
+                dbUser.setLocation(userLocation);
+                return ResponseEntity.ok(userService.save(dbUser));
+            }
         }
     }
 

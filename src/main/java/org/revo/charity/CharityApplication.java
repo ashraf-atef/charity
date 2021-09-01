@@ -9,6 +9,5 @@ import java.time.LocalDate;
 public class CharityApplication {
     public static void main(String[] args) {
         SpringApplication.run(CharityApplication.class, args);
-        System.out.println(LocalDate.now());
     }
 }

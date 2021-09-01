@@ -30,7 +30,7 @@ public class Donation {
     @JoinColumn
     @JsonView(View.DetailedDonation.class)
     private User beneficiary;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     @Nullable
     private PackageInfo packageInfo;

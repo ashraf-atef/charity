@@ -1,5 +1,6 @@
 package org.revo.charity.Service;
 
+import io.micrometer.core.lang.Nullable;
 import org.revo.charity.Domain.User;
 
 import java.util.List;
@@ -10,7 +11,9 @@ public interface UserService {
 
     Optional<User> findOne(Long id);
 
-    Optional<User> findByEmail(String email);
+    Optional<User> findByEmail(@Nullable String email);
+
+    List<User> findListByEmail(@Nullable String email);
 
     Optional<User> findByPhone(String phone);
 

@@ -1,10 +1,12 @@
 package org.revo.charity.Service.Impl;
 
+import io.micrometer.core.lang.Nullable;
 import org.revo.charity.Domain.User;
 import org.revo.charity.Repository.UserRepository;
 import org.revo.charity.Service.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,8 +31,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
+    public Optional<User> findByEmail(@Nullable String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<User> findListByEmail(@Nullable String email) {
+        return userRepository.findListByEmail(email);
     }
 
     @Override

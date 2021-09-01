@@ -28,8 +28,10 @@ public class UserLocation {
     @JsonView(View.BasicUserLocation.class)
     private String BuildingNo;
     @JsonView(View.BasicUserLocation.class)
-    private String streetName;
-    @JsonView(View.BasicUserLocation.class)
     private String landmark;
+    @JsonView(View.BasicUserLocation.class)
+    private double latitude;
+    @JsonView(View.BasicUserLocation.class)
+    private double longitude;
 
 }

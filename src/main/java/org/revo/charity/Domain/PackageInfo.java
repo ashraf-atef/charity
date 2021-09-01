@@ -20,7 +20,6 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PackageInfo {
     @Id
-    @GeneratedValue
     @JsonView(View.BasicPackageInfo.class)
     private Long id;
     @CreatedDate
