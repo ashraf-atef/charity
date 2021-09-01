@@ -67,6 +67,28 @@ public class MainController {
         }
     }
 
+    @PostMapping("huaweiSSO")
+    public ResponseEntity<User> huaweiSSO(@RequestBody User user) {
+        List<User> optionalUser = userService.findListByEmail(user.getEmail());
+        if (!optionalUser.isEmpty())
+            return  ResponseEntity.ok(optionalUser.get(0));
+        else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+            UserLocation userLocation = user.getLocation();
+
+            if (userLocation == null)
+                return ResponseEntity.ok( userService.save(user));
+            else {
+                user.setLocation(null);
+                User dbUser = userService.save(user);
+
+                dbUser.setLocation(userLocation);
+                return ResponseEntity.ok(userService.save(dbUser));
+            }
+        }
+    }
+
     @GetMapping("me")
     public User getMyAccount(@AuthenticationPrincipal User user) {
         return user;
