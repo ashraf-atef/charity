@@ -26,7 +26,7 @@ public class ExceptionTranslator {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ErrorVM processException(Exception ex) {
-        return new ErrorVM("ERROR");
+        return new ErrorVM("ERROR", ex.getMessage());
     }
 }
 
