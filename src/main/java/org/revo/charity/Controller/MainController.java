@@ -8,6 +8,7 @@ import org.revo.charity.Service.JwtSigner;
 import org.revo.charity.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,30 +69,38 @@ public class MainController {
     }
 
     @PostMapping("huaweiSSO")
-    public ResponseEntity<User> huaweiSSO(@RequestBody User user) {
-       Optional<User> optionalUser = userService.findByEmail(user.getEmail());
-        if (optionalUser.isPresent()) {
-            return ResponseEntity.ok(optionalUser.get());
+    public  Mono<ResponseEntity<LoginResponse>> huaweiSSO(@RequestBody User user) {
+       Optional<User> optionalEmailUser = userService.findByEmail(user.getEmail());
+       User dbUser;
+       if (user.getEmail() == null || user.getEmail().isEmpty() || !optionalEmailUser.isPresent()) {
+           Optional<User> optionalPhoneUser = userService.findByPhone(user.getPhone());
+           if(!optionalPhoneUser.isPresent()) {
+               user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+               UserLocation userLocation = user.getLocation();
+
+               if (userLocation == null)
+                   dbUser = userService.save(user);
+               else {
+                   user.setLocation(null);
+                   dbUser = userService.save(user);
+
+                   dbUser.setLocation(userLocation);
+
+                   dbUser = userService.save(dbUser);
+               }
+           } else {
+               dbUser = optionalPhoneUser.get();
+           }
         } else {
-            optionalUser = userService.findByPhone(user.getPhone());
-            if (optionalUser.isPresent()) {
-                return ResponseEntity.ok(optionalUser.get());
-            } else {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
+           dbUser = optionalEmailUser.get();
+       }
 
-                UserLocation userLocation = user.getLocation();
-
-                if (userLocation == null)
-                    return ResponseEntity.ok( userService.save(user));
-                else {
-                    user.setLocation(null);
-                    User dbUser = userService.save(user);
-
-                    dbUser.setLocation(userLocation);
-                    return ResponseEntity.ok(userService.save(dbUser));
-                }
-            }
-        }
+       return Mono.just(dbUser)
+               .cast(UserDetails.class)
+               .map(userDetails -> jwtSigner.createJwt(userDetails))
+                .map(accessToken -> new LoginResponse(accessToken))
+                .map(body -> ResponseEntity.ok(body));
     }
 
     @GetMapping("me")
