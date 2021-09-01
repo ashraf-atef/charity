@@ -69,22 +69,27 @@ public class MainController {
 
     @PostMapping("huaweiSSO")
     public ResponseEntity<User> huaweiSSO(@RequestBody User user) {
-        List<User> optionalUser = userService.findListByEmail(user.getEmail());
-        if (!optionalUser.isEmpty())
-            return  ResponseEntity.ok(optionalUser.get(0));
-        else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+       Optional<User> optionalUser = userService.findByEmail(user.getEmail());
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok(optionalUser.get());
+        } else {
+            optionalUser = userService.findByPhone(user.getPhone());
+            if (optionalUser.isPresent()) {
+                return ResponseEntity.ok(optionalUser.get());
+            } else {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-            UserLocation userLocation = user.getLocation();
+                UserLocation userLocation = user.getLocation();
 
-            if (userLocation == null)
-                return ResponseEntity.ok( userService.save(user));
-            else {
-                user.setLocation(null);
-                User dbUser = userService.save(user);
+                if (userLocation == null)
+                    return ResponseEntity.ok( userService.save(user));
+                else {
+                    user.setLocation(null);
+                    User dbUser = userService.save(user);
 
-                dbUser.setLocation(userLocation);
-                return ResponseEntity.ok(userService.save(dbUser));
+                    dbUser.setLocation(userLocation);
+                    return ResponseEntity.ok(userService.save(dbUser));
+                }
             }
         }
     }
