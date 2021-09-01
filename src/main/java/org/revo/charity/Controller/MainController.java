@@ -72,29 +72,7 @@ public class MainController {
     public  Mono<ResponseEntity<LoginResponse>> huaweiSSO(@RequestBody User user) {
        Optional<User> optionalEmailUser = userService.findByEmail(user.getEmail());
        User dbUser;
-       if (user.getEmail() == null || user.getEmail().isEmpty() || !optionalEmailUser.isPresent()) {
-           Optional<User> optionalPhoneUser = userService.findByPhone(user.getPhone());
-           if(!optionalPhoneUser.isPresent()) {
-               user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-               UserLocation userLocation = user.getLocation();
-
-               if (userLocation == null)
-                   dbUser = userService.save(user);
-               else {
-                   user.setLocation(null);
-                   dbUser = userService.save(user);
-
-                   dbUser.setLocation(userLocation);
-
-                   dbUser = userService.save(dbUser);
-               }
-           } else {
-               dbUser = optionalPhoneUser.get();
-           }
-        } else {
-           dbUser = optionalEmailUser.get();
-       }
+        dbUser = optionalEmailUser.orElseGet(() -> userService.save(user));
 
        return Mono.just(dbUser)
                .cast(UserDetails.class)
