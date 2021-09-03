@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -83,7 +84,8 @@ public class DonationController {
             return ResponseEntity.status(400).build();
         } else {
             Optional<User> optionalBeneficiary = userService.findOne(donationRequest.getBeneficiaryId());
-            if (!optionalBeneficiary.isPresent())
+            if (!optionalBeneficiary.isPresent() ||
+                    Objects.equals(donations.get(0).getDonor().getId(), donationRequest.getBeneficiaryId()))
                 return ResponseEntity.status(406).build();
 
             donations.get(0).setBeneficiary(optionalBeneficiary.get());
